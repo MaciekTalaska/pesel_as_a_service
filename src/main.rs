@@ -19,8 +19,7 @@ fn pesel_check(info: web::Path<String>) -> impl Responder {
 }
 
 fn generate_pesel(info: web::Path<(u16, u8, u8, String)>) -> impl Responder {
-	let gender_param = format!("{}", info.3).to_string();
-	let gender = match gender_param.as_ref() {
+    let gender = match (info.3).as_ref() {
 		"male" => PeselGender::Male,
 		"female" => PeselGender::Female,
 		_ => panic!("error while processing request!"),
