@@ -18,6 +18,7 @@ fn pesel_check(info: web::Path<String>) -> impl Responder {
 	format!("{}", pesel)
 }
 
+
 fn generate_pesel(info: web::Path<(u16, u8, u8, String)>) -> impl Responder {
     let gender = match (info.3).as_ref() {
 		"male" => PeselGender::Male,
@@ -36,7 +37,12 @@ fn generate_pesel(info: web::Path<(u16, u8, u8, String)>) -> impl Responder {
 fn main() -> std::io::Result<()> {
 	//HttpServer::new(||App::new().service(web::resource("/{id}/{name}").to(index)))
 	// HttpServer::new(||App::new().service(web::resource("/{pesel}").to(pesel_check)))
-	HttpServer::new(||App::new().service(web::resource("/{year}/{month}/{day}/{gender}").to(generate_pesel)))
+	HttpServer::new(||
+		{App::new()
+		.service(web::resource("/{year}/{month}/{day}/{gender}").to(generate_pesel))
+		.service(web::resource("/{id}/{name}").to(index))
+		.service(web::resource("/{pesel}").to(pesel_check))
+	})
 	.bind("127.0.0.1:8080")?
 	.run()
 }
