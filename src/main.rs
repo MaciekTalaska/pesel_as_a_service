@@ -33,8 +33,8 @@ fn generate_pesel(info: web::Path<(u16, u8, u8, String)>) -> impl Responder {
 fn main() -> std::io::Result<()> {
 	HttpServer::new(||
 		{App::new()
-		.service(web::resource("/{year}/{month}/{day}/{gender}").to(generate_pesel))
-		.service(web::resource("/{pesel}").to(pesel_check))
+		.service(web::resource("/pesel_generator/{year}/{month}/{day}/{gender}").to(generate_pesel))
+		.service(web::resource("/pesle_validator/{pesel}").to(pesel_check))
 	})
 	.bind("127.0.0.1:8080")?
 	.run()
