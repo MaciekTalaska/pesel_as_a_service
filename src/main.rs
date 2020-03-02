@@ -1,6 +1,6 @@
 use actix_web::{web, App, HttpServer, Responder};
 use pesel::pesel::*;
-use pesel::pesel_parsing_error::*;
+// use pesel::pesel_parsing_error::*;
 use std::str::FromStr;
 
 fn pesel_check(info: web::Path<String>) -> impl Responder {
@@ -34,7 +34,7 @@ fn main() -> std::io::Result<()> {
 	HttpServer::new(||
 		{App::new()
 		.service(web::resource("/pesel_generator/{year}/{month}/{day}/{gender}").to(generate_pesel))
-		.service(web::resource("/pesle_validator/{pesel}").to(pesel_check))
+		.service(web::resource("/pesel_validator/{pesel}").to(pesel_check))
 	})
 	.bind("127.0.0.1:8080")?
 	.run()
