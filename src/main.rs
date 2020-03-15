@@ -31,6 +31,7 @@ fn generate_pesel(info: web::Path<(u16, u8, u8, String)>) -> impl Responder {
 }
 
 fn main() -> std::io::Result<()> {
+	println!("running server on: http://localhost:8080");
 	HttpServer::new(||
 		{App::new()
 		.service(web::resource("/pesel_generator/{year}/{month}/{day}/{gender}").to(generate_pesel))
