@@ -7,11 +7,10 @@ fn pesel_check(info: web::Path<String>) -> impl Responder {
 	let result = PESEL::from_str(&info);
 
 	let pesel = match result {
-		Ok(parsed_pesel) => parsed_pesel,
-		_ => panic!("unable to parse PESEL") 
+		Ok(parsed_pesel) => format!("{}",parsed_pesel).to_string(),
+		_ => "unable to parse PESEL".to_string()
 	};
-
-	format!("{}", pesel)
+	pesel
 }
 
 
