@@ -6,13 +6,11 @@ use std::str::FromStr;
 fn pesel_check(info: web::Path<String>) -> impl Responder {
 	let result = PESEL::from_str(&info);
 
-	let pesel = match result {
-		Ok(parsed_pesel) => format!("{}",parsed_pesel).to_string(),
+	match result {
+		Ok(parsed_pesel) => format!("{}",parsed_pesel),
 		_ => "unable to parse PESEL".to_string()
-	};
-	pesel
+	}
 }
-
 
 fn generate_pesel(info: web::Path<(u16, u8, u8, String)>) -> impl Responder {
     let gender = match (info.3).as_ref() {
