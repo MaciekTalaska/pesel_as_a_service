@@ -8,6 +8,8 @@ Routes:
 
 This project exposes two routes:
 
+#### 1. PESEL validation 
+
 `/pesel_validator/<pesel>` - which could be used for validating PESEL number.Please note that PESEL number has to be 11-characters long string consisting only numbers (otherwise you will get error message).
 
 Example:
@@ -21,6 +23,7 @@ gender: female
 valid: true
 ```
 
+#### 2. PESEL generation
 
 `/pesel_generator/<year>/<mont>/<day>/gender` - this route allows generating proper PESEL number for provided date of birth and biological gender of a person
 
