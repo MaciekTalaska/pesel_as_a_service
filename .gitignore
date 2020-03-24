@@ -2,3 +2,4 @@
 /rlstarget
 /target
 **/*.rs.bk
+*.swp
